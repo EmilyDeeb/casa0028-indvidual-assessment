@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "description": "Geographic points for Palestinian cities referenced in citations.json",
+    "source": "citations.json and public sources",
+    "last_updated": "2026-02-13"
+  },
+  "features": [
+    { "type": "Feature", "properties": { "city_id": "ACR", "city_name": "Acre", "ar_city_name": "عكا" }, "geometry": { "type": "Point", "coordinates": [35.0818, 32.9230] } },
+    { "type": "Feature", "properties": { "city_id": "BLM", "city_name": "Bethlehem", "ar_city_name": "بيت لحم" }, "geometry": { "type": "Point", "coordinates": [35.2024, 31.7054] } },
+    { "type": "Feature", "properties": { "city_id": "BSN", "city_name": "Baysan", "ar_city_name": "بيسان" }, "geometry": { "type": "Point", "coordinates": [35.4990, 32.5030] } },
+    { "type": "Feature", "properties": { "city_id": "BSV", "city_name": "Beersheba", "ar_city_name": "بئر السبع" }, "geometry": { "type": "Point", "coordinates": [34.7915, 31.2520] } },
+    { "type": "Feature", "properties": { "city_id": "GZA", "city_name": "Gaza", "ar_city_name": "غزة" }, "geometry": { "type": "Point", "coordinates": [34.4668, 31.5017] } },
+    { "type": "Feature", "properties": { "city_id": "HBR", "city_name": "Hebron", "ar_city_name": "الخليل" }, "geometry": { "type": "Point", "coordinates": [35.0998, 31.5326] } },
+    { "type": "Feature", "properties": { "city_id": "HFA", "city_name": "Haifa", "ar_city_name": "حيفا" }, "geometry": { "type": "Point", "coordinates": [34.9896, 32.7940] } },
+    { "type": "Feature", "properties": { "city_id": "JFA", "city_name": "Yaffa", "ar_city_name": "يافا" }, "geometry": { "type": "Point", "coordinates": [34.7500, 32.0500] } },
+    { "type": "Feature", "properties": { "city_id": "JNN", "city_name": "Jinin", "ar_city_name": "جنين" }, "geometry": { "type": "Point", "coordinates": [35.2990, 32.4603] } },
+    { "type": "Feature", "properties": { "city_id": "JRS", "city_name": "Jerusalem", "ar_city_name": "القدس" }, "geometry": { "type": "Point", "coordinates": [35.2137, 31.7683] } },
+    { "type": "Feature", "properties": { "city_id": "NBL", "city_name": "Nablus", "ar_city_name": "نابلس" }, "geometry": { "type": "Point", "coordinates": [35.2622, 32.2211] } },
+    { "type": "Feature", "properties": { "city_id": "NZT", "city_name": "Nazareth", "ar_city_name": "الناصرة" }, "geometry": { "type": "Point", "coordinates": [35.3035, 32.6996] } },
+    { "type": "Feature", "properties": { "city_id": "RLL", "city_name": "Al-Ramla", "ar_city_name": "الرملة" }, "geometry": { "type": "Point", "coordinates": [34.8729, 31.9316] } },
+    { "type": "Feature", "properties": { "city_id": "RML", "city_name": "Ramallah", "ar_city_name": "رام الله" }, "geometry": { "type": "Point", "coordinates": [35.2034, 31.9038] } },
+    { "type": "Feature", "properties": { "city_id": "SFD", "city_name": "Safad", "ar_city_name": "صفد" }, "geometry": { "type": "Point", "coordinates": [35.4960, 32.9646] } },
+    { "type": "Feature", "properties": { "city_id": "TBR", "city_name": "Tiberias", "ar_city_name": "طبريا" }, "geometry": { "type": "Point", "coordinates": [35.5312, 32.7922] } },
+    { "type": "Feature", "properties": { "city_id": "TLK", "city_name": "Tulkarm", "ar_city_name": "طولكرم" }, "geometry": { "type": "Point", "coordinates": [35.0286, 32.3104] } }
+  ]
+}
