@@ -1,4 +1,4 @@
-{
+export const points = {
   "type": "FeatureCollection",
   "features": [
     { "type": "Feature", "properties": { "city_id": "ACR", "city_name": "Acre", "ar_city_name": "عكا" }, "geometry": { "type": "Point", "coordinates": [35.0818, 32.9230] } },
@@ -19,4 +19,4 @@
     { "type": "Feature", "properties": { "city_id": "TBR", "city_name": "Tiberias", "ar_city_name": "طبريا" }, "geometry": { "type": "Point", "coordinates": [35.5312, 32.7922] } },
     { "type": "Feature", "properties": { "city_id": "TLK", "city_name": "Tulkarm", "ar_city_name": "طولكرم" }, "geometry": { "type": "Point", "coordinates": [35.0286, 32.3104] } }
   ]
-}
+};

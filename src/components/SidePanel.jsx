@@ -1,41 +1,56 @@
-export default function SidePanel({ city, citations, onClose }) {
-  if (!city) {
+import { useState } from "react";
+
+export default function SidePanel({ cities, citationsByCity, onSelectCity }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  if (!cities || !cities.features) {
     return (
-      <div style={{ padding: 16, borderLeft: "1px solid #eee" }}>
-        <h2 style={{ marginTop: 0 }}>Palestinian Literary Map</h2>
-        <p>Click a city to read excerpts and sources.</p>
+      <div className="sidePanel">
+        <p>Loading cities...</p>
       </div>
     );
   }
 
-  const { city_name } = city.properties;
+  const filteredCities = cities.features.filter(feature => 
+    feature.properties.city_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const getCitationCount = (cityId) => {
+    return citationsByCity[cityId]?.length || 0;
+  };
 
   return (
-    <div style={{ padding: 16, borderLeft: "1px solid #eee", overflowY: "auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
-        <h2 style={{ marginTop: 0 }}>{city_name}</h2>
-        <button onClick={onClose} style={{ height: 36 }}>✕</button>
+    <div className="sidePanel">
+      <div className="sidePanelHeader">
+        <h3 className="sidePanelTitle">Cities</h3>
+        <p className="sidePanelSubtext">{cities.features.length} cities</p>
       </div>
 
-      <p style={{ opacity: 0.7, marginTop: -8 }}>
-        {citations.length} excerpt{citations.length !== 1 ? "s" : ""}
-      </p>
+      <input 
+        type="text"
+        placeholder="Search cities..."
+        className="sidePanelSearch"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
 
-      <div style={{ display: "grid", gap: 12 }}>
-        {citations.map((c) => (
-          <div key={`${c.city_id}-${c.log_id}`} style={{ padding: 12, border: "1px solid #eee", borderRadius: 12 }}>
-            <div style={{ fontWeight: 600 }}>{c.author}</div>
-            <div style={{ fontSize: 13, opacity: 0.75 }}>{c.work}</div>
-
-            <p style={{ whiteSpace: "pre-line", marginTop: 8 }}>
-              {c.sentence}
-            </p>
-
-            <a href={c.source_url} target="_blank" rel="noreferrer">
-              Source
-            </a>
-          </div>
-        ))}
+      <div className="cityList">
+        {filteredCities.length === 0 && <p style={{padding: "20px"}}>No cities found</p>}
+        {filteredCities.map(feature => {
+          const cityId = feature.properties.city_id;
+          const citationCount = getCitationCount(cityId);
+          
+          return (
+            <div 
+              key={cityId}
+              className="cityListItem"
+              onClick={() => onSelectCity(cityId)}
+            >
+              <div className="cityListName">{feature.properties.city_name}</div>
+              <div className="cityListCount">{citationCount} poem{citationCount !== 1 ? 's' : ''}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

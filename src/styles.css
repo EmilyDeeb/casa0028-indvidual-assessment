@@ -1,5 +1,579 @@
 @import "tailwindcss";
 
-#root {
-    @apply w-full max-w-7xl mx-auto p-8;
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.layout {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.titleOverlay{
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  padding: 10px 16px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.2px;
+  user-select: none;
+  pointer-events: none; /* key: lets you click the map under it */
+  
+  /* Add flex for button layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.modalBackdrop{
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(242, 242, 242, 0.35);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 24px 24px 24px 24px;
+}
+
+.modalCard{
+  width: min(520px, 92vw);
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+
+  background: rgba(244, 224, 234, 0.92);
+  backdrop-filter: blur(10px);
+
+  border-radius: 24px;              /* makes it feel like a panel */
+  box-shadow: 20px 0 60px rgba(0,0,0,0.25);
+  padding: 18px;
+
+  /* optional: nicer edge */
+  border-right: 1px solid rgba(0,0,0,0.08);
+}
+
+.modalHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.modalTitle{
+  margin: 0;
+  font-size: 22px;
+}
+
+.modalSub{
+  margin: 6px 0 0;
+  opacity: 0.7;
+  font-size: 13px;
+}
+
+.modalClose{
+  border: 1px solid rgba(0,0,0,0.12);
+  background: white;
+  border-radius: 10px;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+}
+
+.quoteCard{
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.8);
+}
+
+.quoteMeta{
+  display: grid;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.quoteWork{ font-weight: 700; }
+.quoteAuthor{ font-size: 13px; opacity: 0.75; }
+
+.quoteText{
+  margin: 0 0 10px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.quoteLink{
+  font-size: 13px;
+}
+
+/* Zoom Out Button */
+.zoomOutButton {
+  pointer-events: auto; /* Override parent's pointer-events: none */
+  background: rgb(255, 0, 76);
+  color: white;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 0, 76, 0.3);
+}
+
+.zoomOutButton:hover {
+  background: rgb(220, 0, 60);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 0, 76, 0.4);
+}
+
+.zoomOutButton:active {
+  transform: scale(0.98);
+}
+
+/* Welcome Modal - Left Side */
+.welcomeBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: rgba(242, 242, 242, 0.35);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 24px;
+}
+
+.welcomeCard {
+  width: min(480px, 92vw);
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  
+  border-radius: 24px;
+  box-shadow: 20px 0 60px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+  
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.welcomeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 2px solid rgba(255, 0, 76, 0.2);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.welcomeTitle {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.3;
+  color: rgb(255, 0, 76);
+}
+
+.welcomeBody {
+  line-height: 1.6;
+}
+
+.welcomeBody h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #333;
+}
+
+.welcomeList {
+  margin: 0 0 20px;
+  padding-left: 20px;
+}
+
+.welcomeList li {
+  margin-bottom: 12px;
+}
+
+.welcomeList strong {
+  color: rgb(255, 0, 76);
+}
+
+.welcomeNote {
+  background: rgba(255, 0, 76, 0.08);
+  border-left: 3px solid rgb(255, 0, 76);
+  padding: 12px 16px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.welcomeButton {
+  width: 100%;
+  background: rgb(255, 0, 76);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 0, 76, 0.3);
+}
+
+.welcomeButton:hover {
+  background: rgb(220, 0, 60);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 0, 76, 0.4);
+}
+
+.welcomeButton:active {
+  transform: translateY(0);
+}
+
+/* Side Panel */
+.sidePanel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 25; /* Changed from 15 to 25 so it's above modals but below welcome */
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidePanelHeader {
+  padding: 20px;
+  border-bottom: 2px solid rgba(255, 0, 76, 0.2);
+}
+
+.sidePanelTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(255, 0, 76);
+}
+
+.sidePanelSubtext {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.sidePanelSearch {
+  margin: 16px;
+  padding: 10px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  font-size: 14px;
+  width: calc(100% - 32px);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.sidePanelSearch:focus {
+  border-color: rgb(255, 0, 76);
+}
+
+.cityList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+}
+
+.cityListItem {
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  margin-bottom: 6px;
+}
+
+.cityListItem:hover {
+  background: rgba(255, 0, 76, 0.08);
+  border-color: rgba(255, 0, 76, 0.2);
+}
+
+.cityListItem.active {
+  background: rgba(255, 0, 76, 0.12);
+  border-color: rgba(255, 0, 76, 0.4);
+}
+
+/* Move close button below title overlay */
+.floatingCloseBtn {
+  top: 80px !important; /* Push below title */
+  right: 20px;
+  background: rgb(255, 0, 76);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(255, 0, 76, 0.4);
+  transition: all 0.2s;
+}
+
+.floatingCloseBtn:hover {
+  background: rgb(220, 0, 60);
+  transform: scale(1.05);
+}
+
+/* Move close button below title */
+.floatingCloseBtn {
+  position: absolute;
+  top: 80px !important; /* Push below title overlay */
+  right: 20px;
+  background: rgb(255, 0, 76);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(255, 0, 76, 0.4);
+  transition: all 0.2s;
+}
+
+/* Prevent poem boxes from going too high and overlapping title */
+.floatingPoemBox {
+  position: absolute;
+  width: 240px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 0, 76, 0.25);
+  pointer-events: auto;
+  z-index: 10;
+  animation: floatIn 0.4s ease-out;
+  max-height: 300px; /* Limit height */
+  overflow-y: auto; /* Allow scrolling if needed */
+}
+
+.cityListName {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.cityListCount {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* Poet Filter */
+.poetFilter {
+  display: flex;
+  gap: 8px;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  flex-wrap: wrap;
+}
+
+.poetFilterBtn {
+  padding: 6px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: white;
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.poetFilterBtn:hover {
+  background: rgba(255, 0, 76, 0.08);
+  border-color: rgba(255, 0, 76, 0.3);
+}
+
+.poetFilterBtn.active {
+  background: rgb(255, 0, 76);
+  color: white;
+  border-color: rgb(255, 0, 76);
+}
+
+/* City Image */
+.cityImageContainer {
+  width: 100%;
+  max-height: 200px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.cityImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Adjust map to account for side panel */
+.mapWrap {
+  position: absolute;
+  inset: 0;
+  left: 280px; /* Make room for side panel */
+  z-index: 0;
+}
+
+/* Floating Poems */
+.floatingPoemsContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.floatingPoemBox {
+  position: absolute;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 0, 76, 0.3);
+  pointer-events: auto;
+  z-index: 10;
+  animation: floatIn 0.5s ease-out;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.floatingPoemMeta {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 0, 76, 0.2);
+}
+
+.floatingPoemWork {
+  font-weight: 700;
+  font-size: 14px;
+  color: rgb(255, 0, 76);
+  margin-bottom: 2px;
+}
+
+.floatingPoemAuthor {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.floatingPoemText {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-line;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.floatingPoemLink {
+  font-size: 12px;
+  color: rgb(255, 0, 76);
+  text-decoration: none;
+}
+
+.floatingPoemLink:hover {
+  text-decoration: underline;
+}
+
+.floatingCenterPoint {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  pointer-events: none;
+}
+
+.cityPointPulse {
+  width: 100%;
+  height: 100%;
+  background: rgb(255, 0, 76);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+.floatingCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgb(255, 0, 76);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(255, 0, 76, 0.4);
+  transition: all 0.2s;
+}
+
+.floatingCloseBtn:hover {
+  background: rgb(220, 0, 60);
+  transform: scale(1.05);
+}
+
+/* Push floating poems down so they don't overlap title */
+.floatingCloseBtn {
+  top: 80px; /* Move below title bar */
+  right: 20px;
 }
