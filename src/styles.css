@@ -326,63 +326,9 @@ html, body, #root {
   border-color: rgba(255, 0, 76, 0.4);
 }
 
-/* Move close button below title overlay */
-.floatingCloseBtn {
-  top: 80px !important; /* Push below title */
-  right: 20px;
-  background: rgb(255, 0, 76);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  pointer-events: auto;
-  z-index: 20;
-  box-shadow: 0 4px 12px rgba(255, 0, 76, 0.4);
-  transition: all 0.2s;
-}
-
 .floatingCloseBtn:hover {
   background: rgb(220, 0, 60);
   transform: scale(1.05);
-}
-
-/* Move close button below title */
-.floatingCloseBtn {
-  position: absolute;
-  top: 80px !important; /* Push below title overlay */
-  right: 20px;
-  background: rgb(255, 0, 76);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  pointer-events: auto;
-  z-index: 20;
-  box-shadow: 0 4px 12px rgba(255, 0, 76, 0.4);
-  transition: all 0.2s;
-}
-
-/* Prevent poem boxes from going too high and overlapping title */
-.floatingPoemBox {
-  position: absolute;
-  width: 240px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 0, 76, 0.25);
-  pointer-events: auto;
-  z-index: 10;
-  animation: floatIn 0.4s ease-out;
-  max-height: 300px; /* Limit height */
-  overflow-y: auto; /* Allow scrolling if needed */
 }
 
 .cityListName {
@@ -457,20 +403,6 @@ html, body, #root {
   inset: 0;
   pointer-events: none;
   z-index: 10;
-}
-
-.floatingPoemBox {
-  position: absolute;
-  width: 280px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border: 2px solid rgba(255, 0, 76, 0.3);
-  pointer-events: auto;
-  z-index: 10;
-  animation: floatIn 0.5s ease-out;
 }
 
 @keyframes floatIn {
@@ -549,9 +481,10 @@ html, body, #root {
   }
 }
 
+/* FINAL - Override floating poem styles */
 .floatingCloseBtn {
   position: absolute;
-  top: 20px;
+  top: 85px !important; /* Below title */
   right: 20px;
   background: rgb(255, 0, 76);
   color: white;
@@ -567,13 +500,23 @@ html, body, #root {
   transition: all 0.2s;
 }
 
-.floatingCloseBtn:hover {
-  background: rgb(220, 0, 60);
-  transform: scale(1.05);
+.floatingPoemBox {
+  position: absolute;
+  width: 240px !important;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 0, 76, 0.25);
+  pointer-events: auto;
+  z-index: 10;
+  animation: floatIn 0.4s ease-out;
+  max-height: 250px !important;
+  overflow-y: auto;
 }
 
-/* Push floating poems down so they don't overlap title */
-.floatingCloseBtn {
-  top: 80px; /* Move below title bar */
-  right: 20px;
+/* Increase title z-index to ensure it's always on top */
+.titleOverlay {
+  z-index: 50 !important;
 }

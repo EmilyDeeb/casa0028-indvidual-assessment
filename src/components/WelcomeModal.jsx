@@ -13,16 +13,19 @@ export default function WelcomeModal({ isOpen, onClose }) {
           <h3>How to use this map:</h3>
           <ol className="welcomeList">
             <li>
-              <strong>Click on any city</strong> marked with a pink circle on the map
+              <strong>Browse cities</strong> in the panel on the left
             </li>
             <li>
-              <strong>Read poetic excerpts</strong> about that city from Palestinian poets and writers
+              <strong>Click on any city</strong> in the list or on the map
             </li>
             <li>
-              <strong>Explore sources</strong> by clicking the "Source" links in each citation
+              <strong>Read poems</strong> floating around each city point
             </li>
             <li>
-              <strong>Zoom out</strong> anytime using the button under the title
+              <strong>Explore sources</strong> by clicking the "Source ↗" links
+            </li>
+            <li>
+              <strong>Zoom out</strong> anytime using the button at the top
             </li>
           </ol>
 
